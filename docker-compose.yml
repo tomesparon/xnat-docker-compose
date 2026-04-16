@@ -35,8 +35,9 @@ services:
     depends_on:
       - xnat-db
     environment:
-      - CATALINA_OPTS=-Xms${XNAT_MIN_HEAP} -Xmx${XNAT_MAX_HEAP} -Dxnat.home=${XNAT_HOME}
+      - CATALINA_OPTS=-Xms${XNAT_MIN_HEAP} -Xmx${XNAT_MAX_HEAP} -Dxnat.home=${XNAT_HOME} -Duser.timezone=Europe/London
       - XNAT_HOME=${XNAT_HOME}
+      - TZ=Europe/London
 
   xnat-db:
     container_name: xnat-db
