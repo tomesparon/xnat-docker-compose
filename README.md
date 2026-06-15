@@ -89,7 +89,12 @@ $ cp default.env .env
 When you bring up XNAT with `docker compose up`, several directories are created (if they don't exist already) to store the persistent data.
 
 * **postgres-data** - Contains the XNAT database
-* **xnat/plugins** - Initially contains nothing. However, you can customize your XNAT with plugins by placing jars into this directory and restarting XNAT.
+* **xnat/plugins** - Initially contains nothing. However, you can customize your XNAT with plugins by placing jars into this directory and restarting XNAT. eg 
+/home/user/xnat-docker-compose
+ls xnat/plugins/
+container-service-3.8.0-fat.jar
+ldap-auth-plugin-1.3.0.jar
+ohif-viewer-3.7.0-XNAT-1.8.10.jar
 * **xnat-data/archive** - Contains the XNAT archive
 * **xnat-data/build** - Contains the XNAT build space. This is useful when running the container service plugin.
 * **xnat-data/home/logs** - Contains the XNAT logs.
