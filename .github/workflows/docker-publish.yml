@@ -70,6 +70,14 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+      - name: Debug GitHub variables
+        run: |
+          echo "XNAT_VERSION='${{ vars.XNAT_VERSION }}'"
+          echo "XNAT_ROOT='${{ vars.XNAT_ROOT }}'"
+          echo "XNAT_HOME='${{ vars.XNAT_HOME }}'"
+          echo "TOMCAT_XNAT_FOLDER='${{ vars.TOMCAT_XNAT_FOLDER }}'"
+          echo "TOMCAT_XNAT_FOLDER_PATH='${{ vars.TOMCAT_XNAT_FOLDER_PATH }}'"
+
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
@@ -77,6 +85,7 @@ jobs:
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
           context: ./xnat
+          file: ./xnat/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           build-args: |
             XNAT_VERSION=${{ vars.XNAT_VERSION }}
