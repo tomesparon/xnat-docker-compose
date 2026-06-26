@@ -89,15 +89,25 @@ $ cp default.env .env
 When you bring up XNAT with `docker compose up`, several directories are created (if they don't exist already) to store the persistent data.
 
 * **postgres-data** - Contains the XNAT database
-* **xnat/plugins** - Initially contains nothing. However, you can customize your XNAT with plugins by placing jars into this directory and restarting XNAT. eg 
-/home/user/xnat-docker-compose
-ls xnat/plugins/
-container-service-3.8.0-fat.jar
-ldap-auth-plugin-1.3.0.jar
-ohif-viewer-3.7.0-XNAT-1.8.10.jar
+* **xnat/plugins** - Initially contains nothing. However, you can customize your XNAT with plugins by placing jars into this directory and restarting XNAT.
 * **xnat-data/archive** - Contains the XNAT archive
 * **xnat-data/build** - Contains the XNAT build space. This is useful when running the container service plugin.
 * **xnat-data/home/logs** - Contains the XNAT logs.
+
+## Recommended Installed Plugins
+
+Plugin list
+
+### Recommended Plugins
+
+[ohif-viewer-3.7.0-XNAT-1.8.10.jar](https://bitbucket.org/icrimaginginformatics/ohif-viewer-xnat-plugin/downloads/ohif-viewer-3.7.0-XNAT-1.8.10.jar)
+
+[xnatx-batch-launch-plugin](https://bitbucket.org/xnatx/xnatx-batch-launch-plugin/downloads/)
+
+[Container Service](https://bitbucket.org/xnatdev/container-service/downloads/)
+
+[LDAP AUTH](https://bitbucket.org/xnatx/ldap-auth-plugin/downloads/)
+
 
 ## Environment variables
 
@@ -209,12 +219,23 @@ $ docker compose build xnat-web
 
 It is possible that you will need to use the `--no-cache` argument, if you have only changed local files and not the `Dockerfile` itself.
 
-## Notes on using the Container Service
+## Important Notes on using the Container Service
 
 The Container Service plugin needs some additional configuration to use with the XNAT created by this project.
 
 ### Path Translation
 Short answer: Set up [Path Translation](https://wiki.xnat.org/display/CS/Path+Translation).
+
+Example:
+
+Use these settings to resolve differences between your XNAT archive mount point and the Server mount point for your XNAT data.
+
+XNAT Path Prefix   
+`/data/xnat`  
+Enter the XNAT_HOME server path, i.e. "/data/xnat"   
+Server Path Prefix   
+`/opt/compose/xnat-docker-compose/xnat-data`   
+Enter the Server path to the XNAT_HOME mount, i.e. "/docker/my-data/XNAT"   
 
 First, a bit of background on the problem that arises. The container service connects to the docker socket in the xnat-web container which, by default, is mounted in from the host. When you launch a container from XNAT, the container service will run that container on your host machine. One of the key requirements of the container service is that the XNAT archive and build spaces be available wherever the containers run. That shouldn't be a problem, because they *are* available on your host machine and inside the container since we have mounted them in. Right? Well, the problem is that the archive and build space inside the xnat-web container are at different paths than they are on your host machine. When the container service wants to mount files inside the archive, it finds the path under `/data/xnat/archive`; then it tells docker *on your host machine* to mount files at `/data/xnat/archive`. But on your host machine, the files are not there.
 
