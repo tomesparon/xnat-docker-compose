@@ -108,6 +108,18 @@ Plugin list
 
 [LDAP AUTH](https://bitbucket.org/xnatx/ldap-auth-plugin/downloads/)
 
+## Published Ports
+
+Just some notes on the published port on docker compose - basically it is for the default SCP DICOM receiver built into xnat web.
+
+It's not nginx that's not permitting traffic on port 8104, it's Docker. nginx doesn't support non-http proxying in the standard configuration of its open-source version, but it doesn't really need to do so: instead you can just open whatever ports you have configured for DICOM receivers. The default is 8104, but you can add others as well.
+
+To publish one or more DICOM receiver ports, add the following to your docker-compose.yml file:
+
+services:
+  xnat-web:
+    ports:
+      - 8104:8104
 
 ## Environment variables
 
