@@ -77,6 +77,12 @@ jobs:
         with:
           context: ./xnat
           push: ${{ github.event_name != 'pull_request' }}
+          build-args: |
+            XNAT_VERSION=${{ vars.XNAT_VERSION }}
+            XNAT_ROOT=${{ vars.XNAT_ROOT }}
+            XNAT_HOME=${{ vars.XNAT_HOME }}
+            TOMCAT_XNAT_FOLDER=${{ vars.TOMCAT_XNAT_FOLDER }}
+            TOMCAT_XNAT_FOLDER_PATH=${{ vars.TOMCAT_XNAT_FOLDER_PATH }}          
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
