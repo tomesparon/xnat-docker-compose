@@ -109,7 +109,7 @@ services:
       # variables for the sql script
       - XNAT_DATASOURCE_USERNAME=${XNAT_DATASOURCE_USERNAME}
       - XNAT_DATASOURCE_PASSWORD=${XNAT_DATASOURCE_PASSWORD}
-
+      - TZ=Europe/London
   xnat-nginx:
     container_name: xnat-nginx
     image: nginx:${NGINX_VERSION}
