@@ -96,6 +96,7 @@ services:
   xnat-db:
     container_name: xnat-db
     image: postgres:${PG_VERSION}
+    shm_size: "1gb"
     expose:
       - 5432
     networks:
