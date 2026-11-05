@@ -47,7 +47,7 @@ RUN mkdir -p \
         ${XNAT_ROOT}/prearchive
 RUN /usr/local/bin/make-xnat-config.sh
 RUN rm /usr/local/bin/make-xnat-config.sh
-RUN curl --fail --location --silent --output /tmp/xnat-web-${XNAT_VERSION}.war https://api.bitbucket.org/2.0/repositories/xnatdev/xnat-web/downloads/xnat-web-${XNAT_VERSION}.war
+RUN curl --fail --location --silent --output /tmp/xnat-web-${XNAT_VERSION}.war https://github.com/NrgXnat/xnat/releases/download/1.10.2.1/xnat-web-${XNAT_VERSION}.war
 RUN unzip -o -d ${TOMCAT_XNAT_FOLDER_PATH} /tmp/xnat-web-${XNAT_VERSION}.war
 RUN rm -f /tmp/xnat-web-${XNAT_VERSION}.war
 
