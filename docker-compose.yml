@@ -39,6 +39,9 @@ services:
       - ./xnat-data/cache:${XNAT_ROOT}/cache
       - ./xnat-data/prearchive:${XNAT_ROOT}/prearchive
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./site-logo.png:/usr/local/tomcat/webapps/ROOT/images/xnat-logo.png:ro
+      - ./xnat/themes:/usr/local/tomcat/webapps/ROOT/themes
+
     depends_on:
       - xnat-db
     healthcheck:
