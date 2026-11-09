@@ -54,6 +54,7 @@ services:
       - CATALINA_OPTS=-Xms${XNAT_MIN_HEAP} -Xmx${XNAT_MAX_HEAP} -Dxnat.home=${XNAT_HOME} -Duser.timezone=Europe/London
       - XNAT_HOME=${XNAT_HOME}
       - TZ=Europe/London
+    restart: always
 
   # Second XNAT web node — enabled only with the "multinode" profile
   # (COMPOSE_PROFILES=multinode). Reuses the image built by xnat-web.
@@ -99,6 +100,7 @@ services:
   xnat-db:
     container_name: xnat-db
     image: postgres:${PG_VERSION}
+    shm_size: "1gb"
     expose:
       - 5432
     networks:
