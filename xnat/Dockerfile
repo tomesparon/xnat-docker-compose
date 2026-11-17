@@ -1,10 +1,6 @@
 # syntax=docker/dockerfile:1
 # check=skip=SecretsUsedInArgOrEnv
-
-#FROM tomcat:9.0.115-jdk8-temurin-noble
-FROM  tomcat:9.0.115-jdk21-temurin-noble
-
-LABEL org.opencontainers.image.authors="Matt Kelsey <kelseym@wustl.edu>"
+FROM  tomcat:9-jdk21-temurin-resolute
 
 ARG XNAT_VERSION=${XNAT_VERSION}
 ARG XNAT_ROOT=${XNAT_ROOT}
