@@ -1,6 +1,8 @@
 # syntax=docker/dockerfile:1
 # check=skip=SecretsUsedInArgOrEnv
-FROM  tomcat:9-jdk21-temurin-resolute
+FROM  tomcat:9.0.124-jdk21-temurin-noble
+# java4shell mitigate
+ENV JAVA_TOOL_OPTIONS="-XX:-UseBASE64Intrinsics"
 
 ARG XNAT_VERSION=${XNAT_VERSION}
 ARG XNAT_ROOT=${XNAT_ROOT}
